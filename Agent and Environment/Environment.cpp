@@ -1,9 +1,10 @@
 #include "Environment.h"
+#include <iostream>
 
 Environment::Environment() {
     for (auto &in: map)
         in = 0;
-    map[highestPosition - 1] = 1;
+    map[acceptingState] = 1;
     position = 0;
 }
 
@@ -33,4 +34,13 @@ std::vector<direction> Environment::GetPossibleActions(int state) {
 std::vector<direction> Environment::GetPossibleActions() {
     std::vector<direction> vector = {LEFT, RIGHT};
     return vector;
+}
+
+void Environment::DisplayMap() {
+    for (int pos = 0; pos < sizeof(map) / sizeof(map[0]); ++pos) {
+        if(pos == position) std::cout << 'P';
+        else if(pos == acceptingState) std::cout << 'E';
+        else std::cout << '_';
+    }
+    std::cout << std::endl;
 }

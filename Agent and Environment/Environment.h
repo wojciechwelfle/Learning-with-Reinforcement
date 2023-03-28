@@ -38,6 +38,8 @@ public:
     [[nodiscard]] bool isEndPosition() const {
         return position == acceptingState;
     }
+
+    void DisplayMap();
 };
 
 
