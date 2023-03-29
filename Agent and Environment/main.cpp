@@ -30,7 +30,7 @@ void LearnAgent(Agent *agent, Environment *env, int repeat) {
             int reward = env->GetReward();
             agent->Update(position, action, reward, newPosition, env->isEndPosition());
             env->DisplayMap();
-            std::this_thread::sleep_for(std::chrono::milliseconds(3));
+            std::this_thread::sleep_for(std::chrono::milliseconds(250));
         }
         std::cout << "\n######END#####" << std::endl;
         std::cout << "--------------";

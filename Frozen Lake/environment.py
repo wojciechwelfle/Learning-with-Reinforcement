@@ -1,20 +1,27 @@
 from direction import *
+from config import *
 
 
 class Environment:
     def __init__(self):
-        self.minPos = 0
-        self.maxPos = 3
-        self.board = [[0 for _ in range(4)] for _ in range(4)]
-        self.board[3][3] = 1
+        self.minPosX = 0
+        self.maxPosX = WIDTH - 1
+        self.minPosY = 0
+        self.maxPosY = HEIGHT - 1
 
         self.start = 0
 
         self.pos_x = self.start
         self.pos_y = self.start
-        self.accepting_state = [[1, 1], [1, 3], [2, 3], [3, 0], [3, 3]]
-        self.color_board = [["#ffffff" for _ in range(4)] for _ in range(4)]
-        self.end_state = [3, 3]
+        self.accepting_state = ACCEPTING_STATES
+        self.color_board = [["#ffffff" for _ in range(WIDTH)] for _ in range(HEIGHT)]
+        self.end_state = END_STATE
+        self.penalty = PENALTY
+        self.penalty_value = PENALTY_VALUE
+
+        self.board = [[0 for _ in range(WIDTH)] for _ in range(HEIGHT)]
+        self.board[END_STATE[0]][END_STATE[1]] = 1
+        # self.set_penalty()
 
         self.new_colors = {
             "yellow": "#FFC300",
@@ -25,13 +32,13 @@ class Environment:
         }
 
     def step(self, action):
-        if action == LEFT and self.pos_x != self.minPos:
+        if action == LEFT and self.pos_x != self.minPosX:
             self.pos_x -= 1
-        if action == RIGHT and self.pos_x != self.maxPos:
+        if action == RIGHT and self.pos_x != self.maxPosX:
             self.pos_x += 1
-        if action == UP and self.pos_y != self.minPos:
+        if action == UP and self.pos_y != self.minPosY:
             self.pos_y -= 1
-        if action == DOWN and self.pos_y != self.maxPos:
+        if action == DOWN and self.pos_y != self.maxPosY:
             self.pos_y += 1
         return [self.pos_x, self.pos_y]
 
@@ -59,6 +66,8 @@ class Environment:
             y = self.accepting_state[i][1]
             if x == self.pos_x and y == self.pos_y:
                 return True
+        if self.pos_x == self.end_state[0] and self.pos_y == self.end_state[1]:
+            return True
         return False
 
     def is_end_position_xy(self, p_x, p_y):
@@ -67,6 +76,8 @@ class Environment:
             y = self.accepting_state[i][1]
             if x == p_x and y == p_y:
                 return True
+        if p_x == self.end_state[0] and p_y == self.end_state[1]:
+            return True
         return False
 
     def display_board(self):
@@ -84,8 +95,8 @@ class Environment:
         print()
 
     def update_color_map(self):
-        for y in range(len(self.board)):
-            for x in range(len(self.board[0])):
+        for y in range(len(self.color_board)):
+            for x in range(len(self.color_board[0])):
                 if x == self.pos_x and y == self.pos_y:
                     self.color_board[y][x] = self.new_colors["red"]
                 elif x == self.start and y == self.start:
@@ -96,3 +107,7 @@ class Environment:
                     self.color_board[y][x] = self.new_colors["brown"]
                 else:
                     self.color_board[y][x] = self.new_colors["blue"]
+
+    def set_penalty(self):
+        for penalties in self.penalty:
+            self.board[penalties[0]][penalties[1]] = self.penalty_value

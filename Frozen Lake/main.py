@@ -6,7 +6,7 @@ import gui
 
 env = Environment()
 agent = Agent()
-repeat = 500
+repeat = 1_500_000
 
 learn = Learning(env, agent)
 learn.learn_agent(repeat)
