@@ -1,12 +1,10 @@
 import tkinter as tk
 from environment import *
-
-pixel_size = 125
-delay = 100
+from config import *
 
 
 class EnvironmentGUI(tk.Canvas, Environment):
-    def __init__(self, master, environment, size=pixel_size, interval=delay):
+    def __init__(self, master, environment, size=PIXEL_SIZE, interval=REFRESH_TIME):
         self.environment = environment
         self.rows = len(environment.board[0])
         self.cols = len(environment.board)
