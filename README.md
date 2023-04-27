@@ -4,7 +4,7 @@ Sample Reinforcement Learning Programs.
 
 Car game - AI Car (game code from https://coderslegacy.com/python/python-pygame-tutorial/)
 
-https://user-images.githubusercontent.com/111795716/234940268-4cb85e90-581b-4d7b-ad56-9277feda0f8b.mp4
+https://user-images.githubusercontent.com/111795716/234984454-9fd5bb3c-4221-4f2e-abb7-be8511b14c8a.mp4
 
 Frozen Lake 
 
